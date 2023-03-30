@@ -40,7 +40,7 @@ const serverConfig = {
           context: path.resolve(__dirname, './src/server'),
           configFile: 'tsconfig.json',
         },
-      },
+      }
     ],
   },
   resolve: {

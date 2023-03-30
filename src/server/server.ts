@@ -23,3 +23,6 @@ app.listen(`${config.app.port}`, () => console.log(`Server running on port ${con
 
 // for test if index from config folder works
 import './config';
+
+// testing
+import './db/pool';
