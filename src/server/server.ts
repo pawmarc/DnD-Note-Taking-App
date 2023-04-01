@@ -1,9 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
+import { v4 as uuid } from 'uuid';
+import bcrypt from 'bcrypt';
 
 import config from './config';
 import routes from './routes';
-import { notFoundHandler, globalErrorHandler } from './middlewares/error-handlers';
+import { configurePassport } from './middlewares/passport';
+import { notFoundHandler, globalErrorHandler } from './middlewares/error-handlers.mw';
 
 const app = express();
 
@@ -11,6 +14,7 @@ const app = express();
 app.get('/status', (req, res) => res.sendStatus(200));
 app.head('/status', (req, res) => res.sendStatus(200));
 
+configurePassport(app);
 app.use(express.static('public'));
 app.use(express.json()); // make sure it's before routes
 app.use(morgan('dev'));
@@ -26,3 +30,14 @@ import './config';
 
 // testing
 import './db/pool';
+
+
+
+// BCRYPT
+
+// const salt = bcrypt.genSaltSync(12);
+// const hash = bcrypt.hashSync('password123', salt);
+// console.log(hash);
+
+
+// import './db/queries/users';

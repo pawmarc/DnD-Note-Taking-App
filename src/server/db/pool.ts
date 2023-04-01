@@ -4,10 +4,10 @@ import mysql from 'mysql';
 
 const pool = mysql.createPool(config.db);
 
-export const Query = (sql: string, values?: any) => {
+export const Query = <T = any>(sql: string, values?: any) => {
     const formatted = mysql.format(sql, values);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
         pool.query(formatted, (err, result) => {
             if (err) {
                 reject(err);

@@ -9,5 +9,4 @@ const App = (props: AppProps) => {
         </div>
     )
 }
-
 export default App;
