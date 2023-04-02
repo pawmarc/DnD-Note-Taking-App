@@ -1,10 +1,17 @@
 import { Router } from "express";
-import passport from "passport";
+import { handleLogin } from "../../middlewares/auth.mw";
+import { createJWT } from "../../utils/tokens";
+
 
 const router = Router();
 
-router.post('/', passport.authenticate('local', { session: false }), (req, res, next) => {
-    res.json(req.body);
+router.post('/', handleLogin, (req, res, next) => {
+    try {
+        const token = createJWT(req.currentUser.id);
+        res.json({ token });
+    } catch (error) {
+        next(error);
+    }
 })
 
 export default router;
