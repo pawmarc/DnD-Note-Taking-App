@@ -1,13 +1,14 @@
 import passport from 'passport';
-import passportLocal from 'passport-local';
-import type { Express } from 'express';
+import PassportLocal from 'passport-local';
+import PassportJWT from 'passport-jwt';
 import bcrypt from 'bcrypt';
-
 import db from '../db';
-
+import config from '../config';
+import type { Express } from 'express';
+import users from '../db/queries/users';
 export function configurePassport(app: Express) {
 
-    passport.use(new passportLocal.Strategy({
+    passport.use(new PassportLocal.Strategy({
         'usernameField': 'email',
         'session': false
     }, async (email, password, done) => {
@@ -33,5 +34,16 @@ export function configurePassport(app: Express) {
 
     }));
 
+    passport.use(new PassportJWT.Strategy({
+        jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: config.jwt.secret,
+    }, (payload, done) => {
+        try {
+            done(null, payload);
+        } catch (error) {
+            done(error);
+        }
+    }))
     app.use(passport.initialize());
 }
+

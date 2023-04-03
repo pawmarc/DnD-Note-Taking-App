@@ -4,7 +4,7 @@ import mysql from 'mysql';
 
 const pool = mysql.createPool(config.db);
 
-export const Query = <T = any>(sql: string, values?: any) => {
+export const Query = <T = mysql.OkPacket>(sql: string, values?: any) => {
     const formatted = mysql.format(sql, values);
 
     return new Promise<T>((resolve, reject) => {

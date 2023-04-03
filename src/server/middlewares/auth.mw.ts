@@ -8,14 +8,23 @@ export const handleLogin = (
 ) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
 
-        if (error) {
-            return next(error);
-        }
-        if (info) {
-            return res.status(401).json({ message: info.message });
-        }
+        if (error) next(error);
+        if (info) res.status(401).json({ message: info.message });
 
         req.currentUser = user;
+        next();
+    })(req, res, next);
+}
+
+export const checkToken = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    passport.authenticate('jwt', { session: false }, (error, user, info) => {
+        if (error) next(error);
+        if (info) res.status(401).json({ message: info.message });
+        req.payload = user;
         next();
     })(req, res, next);
 }
