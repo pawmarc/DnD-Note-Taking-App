@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import { v4 as uuid } from 'uuid';
 import bcrypt from 'bcrypt';
+import path from 'path';
 
 import config from './config';
 import routes from './routes';
@@ -19,6 +20,7 @@ app.use(express.static('public'));
 app.use(express.json()); // make sure it's before routes
 app.use(morgan('dev'));
 app.use(routes);
+app.get(['/login', '/private'], (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
