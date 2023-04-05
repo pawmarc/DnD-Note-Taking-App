@@ -22,7 +22,7 @@ app.use(routes);
 app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
-app.listen(`${config.app.port}`, () => console.log(`Server running on port ${config.app.port}...`));
+app.listen(config.app.port, () => console.log(`Server running on port ${config.app.port}...`));
 
 
 // for test if index from config folder works

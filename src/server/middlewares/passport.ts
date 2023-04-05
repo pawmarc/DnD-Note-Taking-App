@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 import db from '../db';
 import config from '../config';
 import type { Express } from 'express';
-import users from '../db/queries/users';
 export function configurePassport(app: Express) {
 
     passport.use(new PassportLocal.Strategy({
