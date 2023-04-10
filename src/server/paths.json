@@ -1,0 +1,9 @@
+{
+    "paths": [
+        "/login",
+        "/profile",
+        "/register",
+        "/notes",
+        "/notes/:id"
+    ]
+}

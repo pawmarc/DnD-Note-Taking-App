@@ -9,6 +9,8 @@ import routes from './routes';
 import { configurePassport } from './middlewares/passport';
 import { notFoundHandler, globalErrorHandler } from './middlewares/error-handlers.mw';
 
+const { paths } = require('./paths.json');
+
 const app = express();
 
 // status checkers
@@ -20,7 +22,7 @@ app.use(express.static('public'));
 app.use(express.json()); // make sure it's before routes
 app.use(morgan('dev'));
 app.use(routes);
-app.get(['/login', '/private'], (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
+app.get(paths, (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 app.use(notFoundHandler);
 app.use(globalErrorHandler);
 

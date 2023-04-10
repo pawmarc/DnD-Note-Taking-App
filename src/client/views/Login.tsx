@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import authService from '../services/auth';
+import { useAuth } from '../utilities/use-auth';
 
 interface LoginProps {
 
@@ -14,10 +15,10 @@ const Login = (props: LoginProps) => {
         "password": "password123"
     });
     const [error, setError] = useState<string>('');
+    const { signIn } = useAuth();
 
 
     const location = useLocation();
-    const navigate = useNavigate();
 
     const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValues(prev => {
@@ -32,26 +33,9 @@ const Login = (props: LoginProps) => {
         e.preventDefault();
 
         authService.loginUser(values)
-            .then((res) => navigate('/private'))
+            .then((res) => signIn('/profile'))
             .catch(e => setError(`${e.message}`));
 
-        // const result = fetch('/auth/login', {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(values)
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             throw new Error('bad request!');
-        //         }
-        //         return res.json();
-        //     })
-        //     .then(data => {
-        //         localStorage.setItem('token', data.token)
-        //     })
-        //     .catch(e => console.log('[error]:', e.message));
     }
 
     useEffect(() => {
@@ -81,8 +65,8 @@ const Login = (props: LoginProps) => {
     return (
         <div>
             <h1>Login Page</h1>
-            {loggedIn ? <div>User Logged in!</div> : ''}
-            {location.state?.from === '/private' && <div>Redirected from private!</div>}
+            {loggedIn ? <div>User is logged in!</div> : ''}
+            {location.state?.message && <div>{location.state?.message}</div>}
             <div>
                 <form action="">
                     <input name="email" autoComplete="current-email" type="email" value={values.email || ''} onChange={handleChanges} />

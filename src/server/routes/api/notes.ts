@@ -12,10 +12,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
         const results = await db.notes.one(id);
-        res.json({
-            results,
-            message: "Request completed. Got one note details."
-        });
+        res.json(results);
     } catch (error) {
         next(error);
     }
@@ -25,10 +22,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
     try {
         const results = await db.notes.all();
-        res.json({
-            results,
-            message: "Request completed. Got all notes."
-        });
+        res.json(results);
     } catch (error) {
         next(error);
     }

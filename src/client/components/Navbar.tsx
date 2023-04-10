@@ -5,12 +5,18 @@ interface NavbarProps {
 
 }
 
+const styles = {
+    marginLeft: '10px'
+}
+
 const Navbar = (props: NavbarProps) => {
     return (
         <div>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/private">Private</Link>
+            <Link style={styles} to="/">Home</Link>
+            <Link style={styles} to="/notes">Notes</Link>
+            <Link style={styles} to="/login">Login</Link>
+            <Link style={styles} to="/register">Register</Link>
+            <Link style={styles} to="/profile">Profile</Link>
         </div>
     )
 }
