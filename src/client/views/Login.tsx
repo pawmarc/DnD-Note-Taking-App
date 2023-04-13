@@ -9,16 +9,16 @@ interface LoginProps {
 
 const Login = (props: LoginProps) => {
 
+    const location = useLocation();
+    const { signIn } = useAuth();
+    const [error, setError] = useState<string>('');
     const [loggedIn, setLoggedIn] = useState(false);
+
     const [values, setValues] = useState<{ [key: string]: string }>({
         "email": "adam_mickiewicz@gmail.com",
         "password": "password123"
     });
-    const [error, setError] = useState<string>('');
-    const { signIn } = useAuth();
 
-
-    const location = useLocation();
 
     const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValues(prev => {
@@ -37,29 +37,6 @@ const Login = (props: LoginProps) => {
             .catch(e => setError(`${e.message}`));
 
     }
-
-    useEffect(() => {
-        const token = localStorage.token;
-        if (!token) {
-            return;
-        }
-        fetch('/auth/validate/me', {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${token}`,
-            },
-        })
-            .then(res => {
-                if (res.ok) {
-                    setLoggedIn(true);
-                }
-                else {
-                    setLoggedIn(false);
-                }
-            })
-            .catch(err => console.error(err))
-    }, [])
 
 
     return (

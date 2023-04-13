@@ -1,4 +1,4 @@
-import { get, post } from './base';
+import { _delete, get, post, put } from './base';
 
 
 const getAllNotes = async () => {
@@ -19,7 +19,37 @@ const getOneNote = async (noteId) => {
     }
 }
 
+const addNewNote = async (payload: { [key: string]: string }) => {
+    try {
+        const { id, message } = await post('/api/notes', payload);
+        return { id, message };
+    } catch (error) {
+        throw error;
+    }
+}
+
+const deleteNote = async (noteid: string) => {
+    try {
+        const { id, message } = await _delete(`/api/notes/${noteid}`);
+        return { id, message };
+    } catch (error) {
+        throw error;
+    }
+}
+
+const updateNote = async (noteid: string, payload: { [key: string]: string }) => {
+    try {
+        const { id, message } = await put(`/api/notes/${noteid}`, payload);
+        return { id, message }
+    } catch (error) {
+        throw error
+    }
+}
+
 export default {
     getAllNotes,
     getOneNote,
+    addNewNote,
+    deleteNote,
+    updateNote
 }

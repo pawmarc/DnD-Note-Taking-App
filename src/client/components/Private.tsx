@@ -9,7 +9,7 @@ interface PrivateProps {
 const Private = (props: PrivateProps) => {
     const location = useLocation();
     const { authenticated } = useAuth();
-    console.log(location);
+    // console.log(location);
     if (!authenticated) {
         return (
             <Navigate

@@ -4,6 +4,8 @@
         "/profile",
         "/register",
         "/notes",
-        "/notes/:id"
+        "/notes/:id",
+        "/notes/newnote",
+        "/notes/:id/update"
     ]
 }

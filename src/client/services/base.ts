@@ -38,7 +38,6 @@ const json = async (url: string, method: string, body?: { [key: string]: string 
             return response;
         }
         else {
-            console.error('[fetch error:]', response);
             throw new Error(response.error || response.message || 'something went wrong');
         }
     } catch (error) {
