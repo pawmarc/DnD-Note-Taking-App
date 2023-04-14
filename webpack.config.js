@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
   mode: process.env.NODE_ENV || 'development',
@@ -13,18 +14,27 @@ const clientConfig = {
         exclude: /node_modules/,
         options: {
           context: path.resolve(__dirname, './src/client'),
-          configFile: 'tsconfig.json',
-        },
+          configFile: 'tsconfig.json'
+        }
       },
-    ],
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader'
+        ]
+      }
+    ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js']
   },
   output: {
-    filename: 'js/app.js',
-    path: path.resolve(__dirname, 'public'),
+    filename: 'app.js',
+    path: path.resolve(__dirname, 'public/js')
   },
+  plugins: [new HtmlWebpackPlugin({ template: 'public/index.html' })]
 };
 
 const serverConfig = {
@@ -38,23 +48,23 @@ const serverConfig = {
         exclude: /node_modules/,
         options: {
           context: path.resolve(__dirname, './src/server'),
-          configFile: 'tsconfig.json',
-        },
+          configFile: 'tsconfig.json'
+        }
       }
-    ],
+    ]
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js']
   },
   output: {
     filename: 'server.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   target: 'node',
   node: {
-    __dirname: false,
+    __dirname: false
   },
-  externals: [nodeExternals()],
+  externals: [nodeExternals()]
 };
 
 module.exports = [serverConfig, clientConfig];
