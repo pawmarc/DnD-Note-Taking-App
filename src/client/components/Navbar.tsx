@@ -1,23 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 interface NavbarProps {
-
+    toggleVisible: () => void;
 }
 
 const styles = {
     marginLeft: '10px'
 }
 
-const Navbar = (props: NavbarProps) => {
+const Navbar = ({ toggleVisible }: NavbarProps) => {
+
     return (
         <div>
-            <Link style={styles} to="/">Home</Link>
-            <Link style={styles} to="/notes">Notes</Link>
-            <Link style={styles} to="/login">Login</Link>
-            <Link style={styles} to="/register">Register</Link>
-            <Link style={styles} to="/profile">Profile</Link>
-            <Link style={styles} to="/notes/new">Add Note</Link>
+            <button className='btn btn-square btn-ghost' onClick={toggleVisible}>
+                <GiHamburgerMenu className="text-2xl md:text-3xl" /></button>
         </div>
     )
 }
