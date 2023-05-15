@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { useForm } from '../utilities/use-form';
 import notesService from '../services/notes';
+import { Container } from '../components';
 
 interface UpdateNoteProps {
 
@@ -48,7 +49,7 @@ export default function UpdateNote() {
     }, [id])
 
     return (
-        <div>
+        <Container className='p-8'>
             <h1>UpdateNote View</h1>
             <div>
                 <form>
@@ -65,6 +66,6 @@ export default function UpdateNote() {
                 <p>{noteData.message ? `${noteData.message} with an id: ${noteData.id}` : ''}</p>
                 <p>{error ? `${error}` : ''}</p>
             </div>
-        </div>
+        </Container>
     )
 }

@@ -1,5 +1,16 @@
-# DnD Note Taker
+## DnD Note Taker
 
-## source: https://www.youtube.com/watch?v=dnCRr7S0bEY&list=PLp8YCP6EV3eJvZJzm3pcoZDUC6xHWx8b4&ab_channel=Covalence
+### Basic note app done as a result of following CRUD/MERN Stack lessons.
 
-### Covalence Channel
+### Technologies used:
+- javascript
+- react
+- typescript
+- express
+- node
+- mysql
+- webpack
+- tailwind
+- daisyui
+
+#### source: Covalence Channel

@@ -21,14 +21,12 @@ export default function AuthProvider(props: AuthProviderProps) {
 
     useEffect(() => {
         authService.validateToken()
-            .then(() => {
-                setTimeout(() => (
-                    setAuthState({
+            .then(() =>
+            (setAuthState({
                         authenticated: true,
-                        checking: false
-                    })
-                ), 2000)
-            })
+                checking: false,
+            }))
+            )
             .catch((err) => {
                 setAuthState({
                     authenticated: false,

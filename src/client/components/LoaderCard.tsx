@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface LoaderCardProps {
     length?: number;
@@ -6,6 +6,20 @@ interface LoaderCardProps {
 }
 
 export default function LoaderCard({ length }: LoaderCardProps) {
+
+    const [blankLoader, setBlankLoader] = useState<boolean>(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setBlankLoader(false), 500);
+        return () => {
+            clearInterval(timer);
+        };
+    }, [])
+
+    if (blankLoader) {
+        return <div className='bg-cyan-200'></div>;
+    }
+
     return (
         <div className='flex flex-col items-center justify-center min-h-screen px-4 md:px-14'>
             {Array(length).fill('').map((_, index) => (

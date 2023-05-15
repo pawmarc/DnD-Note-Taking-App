@@ -1,13 +1,11 @@
-import { useState } from "react"
+import React, { useState } from 'react';
 
 export const useForm = <T = any>(initialValues: any) => {
+
     const [values, setValues] = useState<T>(initialValues);
 
     const handleChanges = (e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
-        setValues((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }))
+        setValues(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     const reset = () => setValues(initialValues);
@@ -18,4 +16,5 @@ export const useForm = <T = any>(initialValues: any) => {
         handleChanges,
         reset
     }
+
 }

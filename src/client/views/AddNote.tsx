@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useForm } from '../utilities/use-form';
 import notesService from '../services/notes';
+import { Container } from '../components';
 
 interface AddNoteProps {
 
@@ -26,22 +27,29 @@ export default function AddNote() {
     }
 
     return (
-        <div>
-            <h1>AddNote View</h1>
+        <Container className="p-8">
+            <h1 className='text-3xl prose text-teal-100'>AddNote View View</h1>
             <div>
-                <form>
+                <form className='flex flex-wrap items-center justify-center flex-column'>
+                    <div className="flex items-center justify-center w-full mb-2 max-w form-control">
                     <textarea
                         name='body'
                         value={values.body || ''}
                         onChange={handleChanges}
                         rows={10}
+                            className='w-full p-2 md:w-1/2'
                     />
-                    <button onClick={handleSubmit}>Add New Note!</button>
+                    </div>
+
+                    <div className="flex items-center justify-center w-full mb-2 max-w form-control">
+                        <button className='p-2 btn btn-accent md:w-1/2' onClick={handleSubmit}>Add New Note!</button>
+                    </div>
+
                 </form>
             </div>
             <div>
                 <p>{noteData.message ? `${noteData.message} with an id: ${noteData.id}` : ''}</p>
             </div>
-        </div>
+        </Container>
     )
 }
